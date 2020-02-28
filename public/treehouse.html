@@ -1,0 +1,45 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="http://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" type="text/css">
+    <link rel="styesheet" href="css/bootstrap.css">
+    <title>AJAX with JavaScript</title>
+</head>
+<body>
+    <h1 style="color: aqua; background-color: darkslategrey; text-align: center;">TREEHOUSE JAVASCRIPT TUTORIAL</h1>
+    <div class="grid-container centered">
+        <div class="grid-100">
+            <div class="contained">
+                <div class="grid-100">
+                    <div class="heading">
+                        <h1>Bring on the JavaScript</h1>
+                        <button id="load" onclick="sendAJAX()">Bring it!</button>
+                    </div>
+                    <ul id="ajax">
+
+                    </ul> 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        var xhr = new XMLHttpRequest();
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4){
+                document.getElementById('ajax').innerHTML = xhr.responseText;
+            }
+        };
+        xhr.open('GET', 'sidebar.html');
+
+        function sendAJAX (){
+            xhr.send();
+            document.getElementById('load').style.display = "none";
+        }
+    </script>
+
+    <script src="app.js"></script>
+</body>
+</html>
