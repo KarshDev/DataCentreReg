@@ -1,3 +1,5 @@
+import { response } from "express";
+
 const tableDb = [];
 function sendData() {
     const username = document.querySelector('#name').value;
@@ -57,8 +59,8 @@ function getTableDb() {
                     <td>${item.description}</td>
                     <td>${item.date}</td>
                     <td>
-                        <button class='delete' id=${item._id}>Delete</button>
-                        <button class='edit' id='${item._id}'>Edit</button>
+                        <button class='delete' id=${item._id} name=${item.name} value=${item.email}>Delete</button>
+                        <button class='edit' id='${item._id}' name=${item.name} value=${item.email}>Edit</button>
                     </td>
                     </tr>
                 `);
@@ -68,6 +70,10 @@ function getTableDb() {
                 console.log('Error')
             }
     })
+}
+
+function search (){
+    
 }
 
 // tableDb.push(tableData);

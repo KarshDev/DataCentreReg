@@ -8,7 +8,6 @@ const mongoose = require('mongoose');
 const userModel = require('./models/user');
 const bodyParser = require('body-parser');
 const config = require('./config.js');
-var ObjectID = require('mongodb').ObjectID;
 
 mongoose.Promise = global.Promise;
 
@@ -69,7 +68,7 @@ app.get('/getusers',(req,res)=>{
 });
 
 // Delete User Endpoint
-app.delete('/name/:id', (req, res, next) => {
+app.delete('/name/delete/:id', (req, res) => {
     userModel.findByIdAndRemove(req.params.id, function (err) {
         if (err) return next(err);
         res.send('User deleted successfully!');

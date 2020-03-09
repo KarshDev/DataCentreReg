@@ -1,11 +1,7 @@
 // Get the modal
-var modal = document.querySelector(".modal-content");
+const modal = document.querySelector(".modal-content");
 
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on the button, open the modal
-
+// When the user clicks on the button, open the modal with selected id
 const openModal = (id) =>{
     modal.style.display = "block";
 }
@@ -13,8 +9,19 @@ const openModal = (id) =>{
 window.addEventListener('click', e=>{
     switch (e.target.className){
         case 'delete':
+            document.getElementById('disclamer').innerHTML = `Delete User: ${e.target.name} with email ${e.target.value}`
             openModal(e.target.id);
-            fetch
+            
+            function delUser(){
+                fetch('/name/delete/' + e.target.id, {
+                    method: 'DELETE',
+                })
+                .then(res => res.text())
+                .then(text => console.log(text));
+            }
+            const delBtn = document.querySelector("#del");
+            delBtn.addEventListener("click",delUser);
+
             break;
 
         case 'edit':
@@ -31,14 +38,3 @@ window.addEventListener('click', e=>{
         default:
     }
 })
-// When the user clicks on <span> (x), close the modal
-// span.onclick = function() {
-//   modal.style.display = "none";
-// }
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-  if (event.target == modal) {
-    modal.style.display = "none";
-  }
-}
