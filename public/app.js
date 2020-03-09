@@ -4,14 +4,15 @@ function sendData() {
     const regMail = document.querySelector('#email').value;
     const regAddr = document.querySelector('#address').value;
     const userDescription = document.querySelector('#description').value;
-    const regDate = document.querySelector('#myDate').value;
+    const formatedDate = document.querySelector('#myDate').value;
+//    const regDate = formatedDate.getDate() + "/" + (formatedDate.getMonth() + 1) + "/" + formatedDate.getFullYear()
 
     let tableData = {
         name: username,
         email: regMail,
         address: regAddr,
         description: userDescription,
-        date: regDate
+        date: formatedDate
     };
 
     fetch('/newuser',{
@@ -55,6 +56,10 @@ function getTableDb() {
                     <td>${item.address}</td>
                     <td>${item.description}</td>
                     <td>${item.date}</td>
+                    <td>
+                        <button class='delete' id=${item._id}>Delete</button>
+                        <button class='edit' id='${item._id}'>Edit</button>
+                    </td>
                     </tr>
                 `);
             });

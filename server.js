@@ -4,19 +4,21 @@ const path = require("path");
 
 app.use (express.static('public'));
 
-const port = process.env.PORT || 3000;
-
 const mongoose = require('mongoose');
 const userModel = require('./models/user');
 const bodyParser = require('body-parser');
-const dbURI = 'mongodb://127.0.0.1:27017/citizenDB';
+const config = require('./config.js');
+var ObjectID = require('mongodb').ObjectID;
 
-mongoose.connect(dbURI,{
+mongoose.Promise = global.Promise;
 
+mongoose.connect(config.url,{
+    useNewUrlParser: true
 }).then(()=>{
-    console.log("database connection successfull")
+    console.log("Database connection successful")
 }).catch(err=>{
-    console.log(err);
+    console.log('Could not connect to the database. Exiting now...', err);
+    process.exit();
 })
 
 app.use(bodyParser.urlencoded({extended:true}));
@@ -24,8 +26,10 @@ app.use(bodyParser.json());
 
 app.get('/',(req,res)=>{
     console.log(req.query.name);
-    res.send('hello world');
+    res.send('Welcome to our Data Centre');
 });
+
+
 
 //Add User Api
 app.post('/newuser', (req,res)=>{
@@ -62,14 +66,33 @@ app.get('/getusers',(req,res)=>{
         console.log(err);
         res.status(400).json({error:true,message:"Unable to get users"});
     })
-})
+});
 
+// Delete User Endpoint
+app.delete('/name/:id', (req, res, next) => {
+    userModel.findByIdAndRemove(req.params.id, function (err) {
+        if (err) return next(err);
+        res.send('User deleted successfully!');
+    });
+});
+
+// Find One User from Database
+app.get('/search', (req,res)=>{
+    userModel.findById(req.params.userId)
+    .then(response=>{
+        console.log(response)
+          res.status(200).json({message:"Data retrieved successfully",data:response})
+    }).catch(err=>{
+        console.log(err);
+        res.status(400).json({error:true,message:"Unable to get users"});
+    })
+});
 
 // Resolve Home page
 app.get('/home',(req,res)=>{
     res.sendFile(path.resolve(__dirname,'public','index.html'));
 })
 
-app.listen(port,()=>{
-    console.log ('Listening to port', port);
+app.listen(config.port,()=>{
+    console.log ('Listening to port', config.port);
 });
