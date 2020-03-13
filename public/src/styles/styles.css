@@ -1,3 +1,5 @@
+* {box-sizing: border-box}
+
 .modal {
     display: none; /* Hidden by default */
     position: fixed; /* Stay in place */
@@ -7,9 +9,9 @@
     width: 100%; /* Full width */
     height: 100%; /* Full height */
     overflow: auto; /* Enable scroll if needed */
-    background-color: rgb(0,0,0); /* Fallback color */
-    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  }
+    background-color: #474e5d;
+    padding-top: 50px;
+}
   
   /* Modal Content/Box */
   .modal-content {
@@ -48,6 +50,7 @@
     padding: 2px 16px;
     text-align: center;
     margin-bottom: 10px;
+    margin-top: 10px;
     }
   
   /* Modal Footer */
@@ -69,9 +72,22 @@
     animation-name: animatetop;
     animation-duration: 0.4s
   }
+
   
   /* Add Animation */
   @keyframes animatetop {
     from {top: -300px; opacity: 0}
     to {top: 0; opacity: 1}
+  }
+
+  #search {
+    background-image: url('../images/iconsearch.png'); /* Add a search icon to input */
+    background-position: 2px 2px; /* Position the search icon */
+    background-repeat: no-repeat; /* Do not repeat the icon image */
+    width: 100%; /* Full-width */
+    font-size: 12px; /* Increase font-size */
+    padding: 8px 12px 8px 30px; /* Add some padding */
+    border: 1px solid black; /* Add a green border */
+    margin-right: 20px;
+    margin-bottom: 5px; /* Add some space below the input */
   }

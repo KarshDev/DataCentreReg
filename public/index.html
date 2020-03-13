@@ -6,26 +6,26 @@
     <link rel="stylesheet" href="./src/styles/styles.css" type="text/css">
     <title>FORMS with JavaScript</title>
 </head>
-<body>
+<body id='body'>
     <h1 style="color: aqua; background-color: darkslategrey; text-align: center;">FORMS AND ARRAY DATABASE TUTORIAL</h1>
     <div style=" margin-left: 200px; margin-right: 200px;" >
         <h1 style="text-align: center; color: blueviolet;">DATA COLLECTION CENTRE</h1>
 
-        <div  style="border: 5px outset powderblue;">
+        <div>
             <form>
                 <div class="form-group">
                   <label for="name">Citizen Name:</label>
-                  <input type="text" class="form-control" id="name">
+                  <input type="text" class="form-control" id="name"required >
                   <p></p>
                 </div>
                 <div class="form-group">
                   <label for="email">Email:</label>
-                  <input type="email" class="form-control" id="email">
+                  <input type="email" class="form-control" id="email" required>
                   <p></p>
                 </div>
                 <div class="form-group">
                   <label for="address">Address: </label>    
-                  <input type="text" class="form-control" id="address">
+                  <input type="text" class="form-control" id="address" required>
                   <p></p>
                 </div>
                 <div class="form-group">
@@ -37,14 +37,14 @@
                 </div>
                 <div class="form-group">
                   <label for="description">Date:</label> <br>
-                  <input type="date" class="form-control" id="myDate">
+                  <input type="date" class="form-control" id="myDate" required">
                   <p></p>
                 </div>
                 <button type="submit" id="send">Save</button>
             </form>
             <br>
-            <!-- Delete Modal content -->
-              <div class="modal-content">
+              <!-- Delete Modal content -->
+              <div class="modal-content" style="text-align: center;">
                 <div class="modal-header">
                   <span class="close">&times;</span>
                   <h2 id='disclamer'></h2>
@@ -52,23 +52,23 @@
                 <div class="modal-body">
                   <p>This action cannot be undone</p>
                   <p>Please confirm</p>
-                  <button id='del'>Yes, shred data</button> <button class="reject" >No, please dont</button>
-                </div>
-                <div class="modal-footer">
-                  <h3>Click No or outside this pop-up box if not sure</h3>
-
-                </div>
+                  <div>
+                    <button id='del'>Yes, shred data</button> <button class="reject" >No, please dont</button>
+                  </div>
               </div>
-
+              <div class="modal-footer">
+                <h3>Click cancel at the top right corner to exit</h3>
+              </div>
+          </div>
             <div>
                 <h2 style="text-align: center;">Results</h2>
                 <div style="float: right;">
-                  <input type='search' id='search' placeholder="Enter search criteria">
-                  <button type="submit">Search</button>
+                  <input type='text' id='search' onkeyup="mySearch()" placeholder="Enter search criteria">
                   <br>
                 </div>
+
                 <div>
-                  <table style="width:100%" cellspacing="3" cellpadding="3" border="1">
+                  <table style="width:100%" cellspacing="3" cellpadding="3" border="1" id="myTable">
                     <tr>
                         <th>S/N</th>
                         <th>Name</th>
@@ -77,8 +77,8 @@
                         <th>Description</th>
                         <th>Date Enrolled</th>
                     </tr>
-                    <tbody  id="result">
-
+                    <tbody id="result">
+                    
                     </tbody>
                 </table>
                 </div>

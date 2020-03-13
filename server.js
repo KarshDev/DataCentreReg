@@ -49,7 +49,7 @@ app.post('/newuser', (req,res)=>{
           res.status(200).json({success:true,message:"User added successfully!"})
       }).catch(err=>{
           console.log(err);
-          res.status(400).json({error:true, message:"an error occured", error:err})
+          res.status(400).json({error:true, message:"An error occured, fill necessary details", error:err})
       })
 
 
@@ -71,19 +71,32 @@ app.get('/getusers',(req,res)=>{
 app.delete('/name/delete/:id', (req, res) => {
     userModel.findByIdAndRemove(req.params.id, function (err) {
         if (err) return next(err);
-        res.send('User deleted successfully!');
+        res.send('User Deleted Successfully!');
     });
 });
 
 // Find One User from Database
 app.get('/search', (req,res)=>{
-    userModel.findById(req.params.userId)
+    userModel.find(req.params.id)
     .then(response=>{
         console.log(response)
-          res.status(200).json({message:"Data retrieved successfully",data:response})
+          res.status(200).json({message:"User(s) match found",data:response})
     }).catch(err=>{
         console.log(err);
-        res.status(400).json({error:true,message:"Unable to get users"});
+        res.status(400).json({error:true,message:"Search detail mismatch "});
+    })
+});
+
+// Find and Edit User details
+app.put('/edit/:id', (req,res)=>{(
+    userModel.findByIdAndUpdate(req.params.id)
+    )
+    .then(response=>{
+        console.log(response)
+          res.status(200).json({message:"User updated successfully",data:response})
+    }).catch(err=>{
+        console.log(err);
+        res.status(400).json({error:true,message:"Unable to update user"});
     })
 });
 
